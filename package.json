@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/stylus": "^0.48.38",
+    "firebase": "^9.8.4",
     "sirv-cli": "^2.0.0"
   }
 }

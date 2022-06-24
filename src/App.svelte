@@ -1,17 +1,26 @@
 <script lang="ts">
-  import Hello from "./Hello.svelte";
+  import { auth } from "./firebase/index";
+  import { loginWithGoogle, logout } from "./auth/auth";
 
-  let count: number = 0;
+  let isUser: boolean = true;
 
-  const increment = () => (count += 1);
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      return (isUser = true);
+    }
 
-  const decrement = () => (count -= 1);
+    isUser = false;
+  });
 </script>
 
 <main>
-  <h1>count => {count}</h1>
-  <button on:click={increment}>increment</button>
-  <button on:click={decrement}>decrement</button>
+  <h1>hello, world {isUser}</h1>
+  {#if isUser}
+    <h2>this is user</h2>
+    <button on:click={logout}>sign out</button>
+  {:else}
+    <button on:click={loginWithGoogle}>sing in with google</button>
+  {/if}
 </main>
 
 <style>
@@ -19,6 +28,5 @@
     color: #ff3e00;
     font-size: 2rem;
     text-align: center;
-    margin-top: 5rem;
   }
 </style>

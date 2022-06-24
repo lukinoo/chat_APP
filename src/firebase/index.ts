@@ -1,6 +1,13 @@
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
+// config types imported here
 import type { FirebaseConfig } from "./types";
+// env variables imported here
 import { ConfigVariables } from "../env";
 
+// firebase config
 const firebaseConfig: FirebaseConfig = {
   apiKey: ConfigVariables.API_KEY,
   authDomain: ConfigVariables.AUTH_DOMAIN,
@@ -10,4 +17,8 @@ const firebaseConfig: FirebaseConfig = {
   appId: ConfigVariables.APP_ID,
 };
 
-export default firebaseConfig;
+firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const db = firebase.firestore();
