@@ -1,8 +1,13 @@
 <script lang="ts">
+  import Welcome from "./components/Welcome.svelte";
+  import Home from "./components/Home.svelte";
   import { auth } from "./firebase/index";
-  import { loginWithGoogle, logout } from "./auth/auth";
+  import Router from "svelte-spa-router";
+  import { onMount } from "svelte";
+  import { db } from "./firebase/index";
 
-  let isUser: boolean = true;
+  let isUser: boolean;
+  let messages: any[] = [];
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -11,22 +16,28 @@
 
     isUser = false;
   });
+
+  onMount(() => {
+    db.collection("messages")
+      .orderBy("timestamp")
+      .onSnapshot((snapshot) => {
+        messages = [
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            text: doc.data().text,
+          })),
+        ];
+      });
+  });
 </script>
 
 <main>
-  <h1>hello, world {isUser}</h1>
   {#if isUser}
-    <h2>this is user</h2>
-    <button on:click={logout}>sign out</button>
+    <Home {messages} />
   {:else}
-    <button on:click={loginWithGoogle}>sing in with google</button>
+    <Welcome />
   {/if}
 </main>
 
 <style>
-  h1 {
-    color: #ff3e00;
-    font-size: 2rem;
-    text-align: center;
-  }
 </style>
