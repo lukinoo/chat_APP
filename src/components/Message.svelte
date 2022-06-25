@@ -44,20 +44,17 @@
   }
 
   .message.send {
-    align-self: flex-end;
+    flex-direction: column;
   }
 
-  .message.recived {
+  .message.send p {
     align-self: flex-start;
+    border-bottom-right-radius: 1px;
+    color: #fff;
   }
 
   .message.recived p {
     border-bottom-left-radius: 3px;
     background: #ddd;
-  }
-
-  .message.send p {
-    border-bottom-right-radius: 0;
-    color: #fff;
   }
 </style>

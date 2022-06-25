@@ -1,6 +1,7 @@
 <script lang="ts">
   import { auth } from "../firebase";
   import { db } from "../firebase/index";
+  import firebase from "firebase/compat/app";
 
   let input: string = "";
 
@@ -14,7 +15,7 @@
       uid,
       photoURL,
       displayName,
-      sendAt: new Date(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     input = "";

@@ -3,7 +3,7 @@
   import Home from "./components/Home.svelte";
   import { auth } from "./firebase/index";
   import { db } from "./firebase/index";
-  import { collection, onSnapshot, query } from "firebase/firestore";
+  import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
   import type { Messages } from "./types/index";
 
   let isUser: boolean;
@@ -17,7 +17,7 @@
     isUser = false;
   });
 
-  const q = query(collection(db, "messages"));
+  const q = query(collection(db, "messages"), orderBy("createdAt"));
 
   // datas
   onSnapshot(q, (querySnapShot) => {
