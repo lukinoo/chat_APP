@@ -1,6 +1,6 @@
 <script lang="ts">
   import { loginWithGoogle } from "../auth/auth";
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
   import { swoop } from "../animations/index"; // imported animation
 
   let ready: boolean = false;

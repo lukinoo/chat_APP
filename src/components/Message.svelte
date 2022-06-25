@@ -20,7 +20,11 @@
 
 <style>
   .message {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     margin: 6px 0;
   }
@@ -30,6 +34,7 @@
     height: 20px;
     border-radius: 50%;
     margin: 2px 5px;
+    -o-object-fit: cover;
     object-fit: cover;
   }
 
@@ -46,10 +51,20 @@
   }
 
   .message.send {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
 
   .message.admin p {
+    background-image: -o-linear-gradient(
+      135deg,
+      rgba(59, 173, 227, 1) 0%,
+      rgba(87, 111, 230, 1) 25%,
+      rgba(152, 68, 183, 1) 51%,
+      rgba(255, 53, 127, 1) 100%
+    ) !important;
     background-image: linear-gradient(
       -45deg,
       rgba(59, 173, 227, 1) 0%,
@@ -59,7 +74,20 @@
     ) !important;
     background-size: 300% 300%;
     color: #fff !important;
+    -webkit-animation: AnimateBG 15s ease infinite;
     animation: AnimateBG 15s ease infinite;
+  }
+
+  @-webkit-keyframes AnimateBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   @keyframes AnimateBG {
@@ -75,6 +103,7 @@
   }
 
   .message.send p {
+    -ms-flex-item-align: start;
     align-self: flex-start;
     border-bottom-right-radius: 1px;
     color: #fff;
