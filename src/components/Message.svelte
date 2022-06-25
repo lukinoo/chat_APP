@@ -1,9 +1,19 @@
-<script>
+<script lang="ts">
+  import { auth } from "../firebase";
+  import { fly } from "svelte/transition";
+  import type { Message } from "../types/index";
+
+  export let message: Message;
+
+  const { text, uid, photoURL, displayName } = message;
+
+  // sender or reciver
+  const send_revicer = uid === auth.currentUser.uid ? "send" : "recived";
 </script>
 
-<div class="message send">
-  <img src="" alt="" />
-  <p>this is message</p>
+<div class={`message ${send_revicer}`}>
+  <img src={photoURL} alt={displayName} />
+  <p>{text}</p>
 </div>
 
 <style>
@@ -27,7 +37,7 @@
     line-height: 24px;
     padding: 5px 15px;
     font-weight: 300;
-    border-radius: 25px;
+    border-radius: 8px;
     color: #000000;
     background: #ff3e00;
     overflow-wrap: break-word;
@@ -47,7 +57,7 @@
   }
 
   .message.send p {
-    border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 0;
     color: #fff;
   }
 </style>

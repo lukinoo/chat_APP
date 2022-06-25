@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { Messages } from "../types";
+  import Message from "./Message.svelte";
 
   export let messages: Messages;
 </script>
 
 <section>
   <div class="messages-list">
-    <pre>{JSON.stringify(messages, null, 2)}</pre>
+    <!-- <pre>{JSON.stringify(messages, null, 2)}</pre> -->
+    {#each messages as message, index (message)}
+      <Message {message} />
+    {/each}
   </div>
 </section>
 

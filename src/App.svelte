@@ -25,7 +25,7 @@
 
     querySnapShot.forEach((doc) => {
       let msg = { ...doc.data(), id: doc.id };
-      temp_messages = [...temp_messages, msg];
+      temp_messages = [msg, ...temp_messages];
     });
 
     messages = temp_messages;
