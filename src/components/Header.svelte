@@ -14,7 +14,7 @@
 
 <style>
   header {
-    background: #18181c;
+    background: #1b1c1f;
   }
 
   header .header-wrapper {
@@ -27,8 +27,8 @@
   }
 
   header .header-wrapper img {
-    width: 40px;
-    height: 50px;
+    width: 35px;
+    height: 45px;
   }
 
   header .header-wrapper button.log__out__button {

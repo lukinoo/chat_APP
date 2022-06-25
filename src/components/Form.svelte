@@ -14,6 +14,7 @@
       uid,
       photoURL,
       displayName,
+      sendAt: new Date(),
     });
 
     input = "";
@@ -38,8 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: lightseagreen; */
-    background: #18181c;
+    background: #1b1c1f;
   }
 
   form .form__field {
@@ -50,7 +50,7 @@
     border: none;
     background: #fff;
     font-size: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
   }
 
   form .form__field::placeholder {
@@ -59,9 +59,9 @@
 
   form .form__button {
     padding: 0.5rem;
-    font-family: inherit;
     font-size: 1rem;
     border: none;
+    outline: none;
     background: #fff;
   }
 </style>

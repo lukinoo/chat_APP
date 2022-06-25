@@ -2,12 +2,12 @@
   import Welcome from "./components/Welcome.svelte";
   import Home from "./components/Home.svelte";
   import { auth } from "./firebase/index";
-  import Router from "svelte-spa-router";
-  import { onMount } from "svelte";
   import { db } from "./firebase/index";
+  import { collection, onSnapshot, query } from "firebase/firestore";
+  import type { Messages } from "./types/index";
 
   let isUser: boolean;
-  let messages: any[] = [];
+  let messages: Messages = [];
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -17,17 +17,18 @@
     isUser = false;
   });
 
-  onMount(() => {
-    db.collection("messages")
-      .orderBy("timestamp")
-      .onSnapshot((snapshot) => {
-        messages = [
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            text: doc.data().text,
-          })),
-        ];
-      });
+  const q = query(collection(db, "messages"));
+
+  // datas
+  onSnapshot(q, (querySnapShot) => {
+    let temp_messages = [];
+
+    querySnapShot.forEach((doc) => {
+      let msg = { ...doc.data(), id: doc.id };
+      temp_messages = [...temp_messages, msg];
+    });
+
+    messages = temp_messages;
   });
 </script>
 
