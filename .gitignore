@@ -1,5 +1,4 @@
 /node_modules/
 /public/build/
-/src/env.ts
 
 .DS_Store
